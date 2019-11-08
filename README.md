@@ -47,7 +47,7 @@ Trends
 
 ![cluster](img/esxi_2.PNG)
 
-VMware View
+VM View
 
 ![vm](img/vm_1.PNG)
 
