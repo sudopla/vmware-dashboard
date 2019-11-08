@@ -25,9 +25,32 @@ Historical metrics reports
 
 You can then go to a specific cluster
 
-![datacenter](img/cluster_1.PNG)
+![cluster](img/cluster_1.PNG)
 
 In the real time graphs you can see if there are performance problems in the cluster
 
-![datacenter](img/cluster_2.PNG)
+![cluster](img/cluster_2.PNG)
 
+VMs using more resources in the cluster
+
+![cluster](img/cluster_3.PNG)
+
+Historical metrics and trends in the cluster
+
+![cluster](img/cluster_4.PNG)
+
+In the ESXi hosts
+
+![cluster](img/esxi_1.PNG)
+
+Trends
+
+![cluster](img/esxi_2.PNG)
+
+VMware View
+
+![vm](img/vm_1.PNG)
+
+![vm](img/vm_2.PNG)
+
+![vm](img/vm_3.PNG)
