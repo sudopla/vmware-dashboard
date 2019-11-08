@@ -1,0 +1,51 @@
+.page-header1 {
+    padding-bottom: 9px;
+    margin: 20px 0 20px;
+    border-bottom: 1px solid #eee;
+}
+
+h1.page-header1 {
+    font-size: 30px !important;
+}
+
+
+.time_frame {
+    margin-bottom: 20px;
+}
+
+.btn-primary {
+    color: #fff;
+    background-color: #337ab7;
+    border-color: #2e6da4;
+}
+
+.loader {
+    position: fixed;
+    left: 50%;
+    top: 35%;
+    z-index: 1000;
+    display: none;
+    background: transparent url("/static/images/loading-big.gif");
+    z-index: 1000;
+    height: 31px;
+    width: 31px;
+}
+
+div.num_vms {
+    margin-bottom: 40px;
+}
+
+/**CSS for General Metrics**/
+div.progress {
+    margin: 3px 0 3px 0 !important;
+}
+span.float_right {
+    float: right
+}
+#general_metrics {
+    padding-left: 32px;
+}
+div.metric {
+    margin-bottom: 7px;
+}
+

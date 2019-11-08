@@ -1,0 +1,74 @@
+{
+  "name": "@clr/icons",
+  "version": "0.11.10",
+  "description": "Custom Element Icons for Clarity",
+  "homepage": "https://vmware.github.io/clarity/",
+  "main": "index.js",
+  "types": "index.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "ssh://git@git.eng.vmware.com/clarity.git"
+  },
+  "peerDependencies": {
+    "@webcomponents/custom-elements": "^1.0.0"
+  },
+  "author": {
+    "name": "clarity"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/vmware/clarity/issues"
+  },
+  "_id": "@clr/icons@0.11.10",
+  "scripts": {},
+  "_shasum": "eb5ce3ca37d8685eb67ced60f83dbf64b03c9c13",
+  "_from": "@clr/icons@*",
+  "_resolved": "https://registry.npmjs.org/@clr/icons/-/icons-0.11.10.tgz",
+  "_npmVersion": "4.6.1",
+  "_nodeVersion": "8.9.4",
+  "_npmUser": {
+    "name": "adityarb88",
+    "email": "adityarb88@gmail.com"
+  },
+  "dist": {
+    "shasum": "eb5ce3ca37d8685eb67ced60f83dbf64b03c9c13",
+    "tarball": "https://registry.npmjs.org/@clr/icons/-/icons-0.11.10.tgz",
+    "fileCount": 81,
+    "unpackedSize": 11141136
+  },
+  "maintainers": [
+    {
+      "name": "adityarb88",
+      "email": "adityarb88@gmail.com"
+    },
+    {
+      "name": "gnomeontherun",
+      "email": "gnomation@gnomeontherun.com"
+    },
+    {
+      "name": "hippeelee",
+      "email": "hippely@gmail.com"
+    },
+    {
+      "name": "jeeyun",
+      "email": "jeeyun.lim@gmail.com"
+    },
+    {
+      "name": "mathisscott",
+      "email": "mathisscott@yahoo.com"
+    },
+    {
+      "name": "shijir",
+      "email": "shijir99@gmail.com"
+    },
+    {
+      "name": "youdz",
+      "email": "petonnet.eudes@gmail.com"
+    }
+  ],
+  "directories": {},
+  "_npmOperationalInternal": {
+    "host": "s3://npm-registry-packages",
+    "tmp": "tmp/icons_0.11.10_1521727484394_0.5114099241649745"
+  }
+}

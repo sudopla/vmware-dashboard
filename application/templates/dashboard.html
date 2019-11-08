@@ -1,0 +1,327 @@
+<div class="row">
+
+    <div class="col-xs-12 col-sm-12 col-md-5 col-lg-5" id="general_metrics" style="max-width: 400px;">
+        <!--CPU -->
+        <div class="row metric">
+            <span>CPU</span><span class="float_right">Free: {{metrics_usage.free_cpu}} GHz</span>
+            <div class="progress">
+                <div class="progress-bar" role="progressbar" aria-valuenow={{metrics_usage.percent_consumed_cpu}} aria-valuemin="0" aria-valuemax="100" style="width: {{metrics_usage.percent_consumed_cpu}}%;min-width: 2em;">
+                    {{metrics_usage.percent_consumed_cpu}}%
+                </div>
+            </div>
+            <span>Used: {{metrics_usage.total_consumed_cpu}} GHz </span><span class="float_right">Capacity: {{metrics_usage.total_cpu}} GHz</span>
+        </div>
+        <!--Memory -->
+        <div class="row metric">
+            <span>Memory</span><span class="float_right">Free: {{metrics_usage.free_memory}} GB</span>
+            <div class="progress">
+                <div class="progress-bar" role="progressbar" aria-valuenow={{metrics_usage.percent_consumed_mem}} aria-valuemin="0" aria-valuemax="100" style="width: {{metrics_usage.percent_consumed_mem}}%;min-width: 2em;">
+                    {{metrics_usage.percent_consumed_mem}}%
+                </div>
+            </div>
+            <span>Used: {{metrics_usage.total_consumed_mem}} GB </span><span class="float_right">Capacity: {{metrics_usage.total_memory}} GB</span>
+        </div>
+        <!--Storage -->
+        <div class="row metric">
+            <span>Storage</span><span class="float_right">Free: {{metrics_usage.free_storage}} GB</span>
+            <div class="progress">
+                <div class="progress-bar" role="progressbar" aria-valuenow={{metrics_usage.percent_used_storage}} aria-valuemin="0" aria-valuemax="100" style="width: {{metrics_usage.percent_used_storage}}%;min-width: 2em;">
+                    {{metrics_usage.percent_used_storage}}%
+                </div>
+            </div>
+            <span>Used: {{metrics_usage.used_storage}} TB </span><span class="float_right">Capacity: {{metrics_usage.total_storage}} TB</span>
+        </div>
+    </div>
+
+    <!-- Right Side of the screen-->
+    <div class="col-md-1 col-lg-1">
+
+    </div>
+
+    <div class="col-md-6 col-lg-6 squares">
+        <div class="row">
+            <div class="pull-right">
+                <div class="tile_stats_count">
+                      <span class="count_top"><clr-icon shape="cluster" size="20"></clr-icon> Clusters</span>
+                      <div class="count">{{metrics_usage.num_clusters}}</div>
+                </div>
+                <div class="tile_stats_count">
+                      <span class="count_top"><clr-icon shape="host" size="20"></clr-icon> Hosts</span>
+                      <div class="count">{{metrics_usage.num_hosts}}</div>
+                </div>
+                <div class="tile_stats_count">
+                      <span class="count_top"><clr-icon shape="vm" size="20"></clr-icon> VMs</span>
+                      <div class="count">{{metrics_usage.num_vms}}</div>
+                </div>
+                <div class="tile_stats_count">
+                      <span class="count_top"><clr-icon shape="storage" size="20"></clr-icon> Datastores</span>
+                      <div class="count">{{metrics_usage.num_datastores}}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<hr/>
+
+<!-- Line Graphs -->
+
+<div class="row">
+
+    {% for clusters, metrics in metrics_usage.clusters_percents.items %}
+
+        <div class="col-xs-12 col-sm-12 col-md-5 col-lg-6">
+              <div class="x_panel tile fixed_height_380">
+                <div class="x_title">
+                  <h2>{{clusters}}</h2>
+                  <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                  <h4>Average of Metrics usage</h4>
+                  <div class="widget_summary">
+                    <div class="w_left w_25">
+                      <span>CPU</span>
+                    </div>
+                    <div class="w_center w_55">
+                      <div class="progress">
+                        <div class="progress-bar bg-green" role="progressbar" aria-valuenow={{metrics.cpu}} aria-valuemin="0" aria-valuemax="100" style="width: {{metrics.cpu}}%;">
+                          <span class="sr-only">{{metrics.cpu}}% Complete</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="w_right w_20">
+                      <span>{{metrics.cpu}}%</span>
+                    </div>
+                    <div class="clearfix"></div>
+                  </div>
+
+                  <div class="widget_summary">
+                    <div class="w_left w_25">
+                      <span>Memory</span>
+                    </div>
+                    <div class="w_center w_55">
+                      <div class="progress">
+                        <div class="progress-bar bg-green" role="progressbar" aria-valuenow={{metrics.memory}} aria-valuemin="0" aria-valuemax="100" style="width: {{metrics.memory}}%;">
+                          <span class="sr-only">{{metrics.memory}}% Complete</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="w_right w_20">
+                      <span>{{metrics.memory}}%</span>
+                    </div>
+                    <div class="clearfix"></div>
+                  </div>
+                  <div class="widget_summary">
+                    <div class="w_left w_25">
+                      <span>Storage</span>
+                    </div>
+                    <div class="w_center w_55">
+                      <div class="progress">
+                        <div class="progress-bar bg-green" role="progressbar" aria-valuenow={{metrics.storage}} aria-valuemin="0" aria-valuemax="100" style="width: {{metrics.storage}}%;">
+                          <span class="sr-only">{{metrics.storage}}% Complete</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="w_right w_20">
+                      <span>{{metrics.storage}}%</span>
+                    </div>
+                    <div class="clearfix"></div>
+                  </div>
+                  <div class="widget_summary">
+                    <div class="w_left w_25">
+                      <span>Disk Latency</span>
+                    </div>
+                    <div class="w_center w_55">
+                      <div class="progress">
+                        <div class="progress-bar bg-green" role="progressbar" aria-valuenow={{metrics.max_average_latency_percent}} aria-valuemin="0" aria-valuemax="100" style="width: {{metrics.max_average_latency_percent}}%;">
+                          <span class="sr-only">{{metrics.max_average_latency_percent}}</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="w_right w_20">
+                      <span>{{metrics.max_latency_value}}ms</span>
+                    </div>
+                    <div class="clearfix"></div>
+                  </div>
+                </div>
+              </div>
+        </div>
+
+    {% endfor %}
+
+</div>
+
+
+
+<hr/>
+
+<!-- doughnut chart charts graphs-->
+
+<div class="row">
+    <div class="col-xs-12 col-sm-12 col-lg-6 col-xs-6">
+          <div class="x_panel tile fixed_height_320 overflow_hidden">
+            <div class="x_title">
+              <h3>Memory Usage</h3>
+              <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+              <table class="" style="width:100%">
+                <tr>
+                  <th style="width:37%;">
+                    <p>Top 5</p>
+                  </th>
+                  <th>
+                    <div class="col-lg-7 col-md-7 col-sm-7 col-xs-7">
+                      <p class="">Cluster</p>
+                    </div>
+                    <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5">
+                      <p class="">Value</p>
+                    </div>
+                  </th>
+                </tr>
+                <tr>
+                  <td>
+                    <canvas id="cluster_memory" height="170" width="170" style="margin: 15px 10px 10px 0"></canvas>
+                  </td>
+                  <td>
+                    <table class="tile_info cluster_memory">
+                        <!--Insert Values with JavaScript -->
+                    </table>
+                  </td>
+                </tr>
+              </table>
+            </div>
+          </div>
+    </div>
+
+    <!--Another doughnut chart -->
+    <div class="col-md-5 col-sm-6 col-lg-6 col-xs-6">
+          <div class="x_panel tile fixed_height_320 overflow_hidden">
+            <div class="x_title">
+              <h3>CPU Usage</h3>
+              <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+              <table class="" style="width:100%">
+                <tr>
+                  <th style="width:37%;">
+                    <p>Top 5</p>
+                  </th>
+                  <th>
+                    <div class="col-lg-7 col-md-7 col-sm-7 col-xs-7">
+                      <p class="">Cluster</p>
+                    </div>
+                    <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5">
+                      <p class="">Value</p>
+                    </div>
+                  </th>
+                </tr>
+                <tr>
+                  <td>
+                    <canvas id="cluster_cpu" height="170" width="170" style="margin: 15px 10px 10px 0"></canvas>
+                  </td>
+                  <td>
+                    <table class="tile_info cluster_cpu">
+                        <!--Insert Values with JavaScript -->
+                    </table>
+                  </td>
+                </tr>
+              </table>
+            </div>
+          </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-5 col-sm-6 col-lg-6 col-xs-6">
+          <div class="x_panel tile fixed_height_320 overflow_hidden">
+            <div class="x_title">
+              <h3>Storage Usage</h3>
+              <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+              <table class="" style="width:100%">
+                <tr>
+                  <th style="width:37%;">
+                    <p>Top 5</p>
+                  </th>
+                  <th>
+                    <div class="col-lg-7 col-md-7 col-sm-7 col-xs-7">
+                      <p class="">Cluster</p>
+                    </div>
+                    <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5">
+                      <p class="">Value</p>
+                    </div>
+                  </th>
+                </tr>
+                <tr>
+                  <td>
+                    <canvas id="cluster_storage" height="170" width="170" style="margin: 15px 10px 10px 0"></canvas>
+                  </td>
+                  <td>
+                    <table class="tile_info cluster_storage">
+                        <!--Insert Values with JavaScript -->
+                    </table>
+                  </td>
+                </tr>
+              </table>
+            </div>
+          </div>
+    </div>
+
+    <!--Another doughnut chart -->
+    <div class="col-md-5 col-sm-6 col-lg-6 col-xs-6">
+          <div class="x_panel tile fixed_height_320 overflow_hidden">
+            <div class="x_title">
+              <h3>Network Usage</h3>
+              <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+              <table class="" style="width:100%">
+                <tr>
+                  <th style="width:37%;">
+                    <p>Top 5</p>
+                  </th>
+                  <th>
+                    <div class="col-lg-7 col-md-7 col-sm-7 col-xs-7">
+                      <p class="">Cluster</p>
+                    </div>
+                    <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5">
+                      <p class="">Value</p>
+                    </div>
+                  </th>
+                </tr>
+                <tr>
+                  <td>
+                    <canvas id="cluster_network" height="170" width="170" style="margin: 15px 10px 10px 0"></canvas>
+                  </td>
+                  <td>
+                    <table class="tile_info cluster_network">
+                        <!--Insert Values with JavaScript -->
+                    </table>
+                  </td>
+                </tr>
+              </table>
+            </div>
+          </div>
+    </div>
+
+</div>
+
+<hr/>
+
+<div id="graphs">
+
+    {% include "dashboard_graphs.html" %}
+
+</div>
+
+
+<script>
+   var json = {{ cluster_pie_json | safe }};
+</script>
+
+{% load static %}
+<!-- Chart.js -->
+<script src="{% static "dist/js/dashboard.js" %}"></script>

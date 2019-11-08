@@ -1,0 +1,72 @@
+<div class="row time_frame">
+    <div class="col-lg-12">
+        <div class="btn-group" role="group" aria-label="...">
+              <button type="button" value="1" class="btn btn-default {%if interval_m == '1' %}btn-primary{% endif %}" data-link="{% url 'cluster_graphs' cluster=cluster_name interval=1 %}">1 Day</button>
+              <button type="button" value="2" class="btn btn-default {%if interval_m == '2' %}btn-primary{% endif %}" data-link="{% url 'cluster_graphs' cluster=cluster_name interval=2 %}">1 Week</button>
+              <button type="button" value="3" class="btn btn-default {%if interval_m == '3' %}btn-primary{% endif %}" data-link="{% url 'cluster_graphs' cluster=cluster_name interval=3 %}">1 Month</button>
+              <button type="button" value="4" class="btn btn-default {%if interval_m == '4' %}btn-primary{% endif %}" data-link="{% url 'cluster_graphs' cluster=cluster_name interval=4 %}">1 Year</button>
+        </div>
+    </div>
+</div>
+<div class="row">
+    {% if graph_memory %}
+    <div class="col-lg-6">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <i class="fa fa-bar-chart-o fa-fw"></i> Consumed Memory (GB)
+            </div>
+            <!-- /.panel-heading -->
+            <div class="panel-body" style="max-height: 120;">
+                <div style="">
+                    {{ graph_memory|safe }}
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+    {% if graph_cpu %}
+    <div class="col-lg-6">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <i class="fa fa-bar-chart-o fa-fw"></i> CPU Usage (%)
+            </div>
+            <!-- /.panel-heading -->
+            <div class="panel-body">
+                <div style="">
+                    {{ graph_cpu|safe }}
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+    {% if graph_network_usage %}
+    <div class="col-lg-6">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <i class="fa fa-bar-chart-o fa-fw"></i> Network Usage (KBps)
+            </div>
+            <!-- /.panel-heading -->
+            <div class="panel-body">
+                <div style="">
+                    {{ graph_network_usage|safe }}
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+    {% if graph_disk_usage %}
+    <div class="col-lg-6">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <i class="fa fa-bar-chart-o fa-fw"></i> Disk Usage (KBps)
+            </div>
+            <!-- /.panel-heading -->
+            <div class="panel-body">
+                <div style="">
+                    {{ graph_disk_usage |safe }}
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+</div>

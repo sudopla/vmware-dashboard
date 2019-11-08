@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>VMware Dashboard</title>
+
+    {% load static %}
+    <!-- Bootstrap Core CSS -->
+    <link href="{% static "bootstrap/css/bootstrap.min.css" %}" rel="stylesheet">
+    <!-- MetisMenu CSS -->
+    <link href="{% static "metisMenu/metisMenu.css" %}" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="{% static "dist/css/sb-admin-2.css" %}" rel="stylesheet">
+    <!-- Custom Fonts -->
+    <link href="{% static "font-awesome/css/font-awesome.min.css" %}" rel="stylesheet" type="text/css">
+     <!-- Custom Fonts -->
+    <link href="{% static "dist/css/screen.css" %}" rel="stylesheet" type="text/css">
+    <link href="{% static "dist/css/charts_screen.css" %}" rel="stylesheet" type="text/css">
+    <link href="{% static "dist/css/chart_lines.css" %}" rel="stylesheet" type="text/css">
+    <link href="{% static "dist/css/squares.css" %}" rel="stylesheet" type="text/css">
+
+    <!--CLARITY ICONS STYLE-->
+    <link rel="stylesheet" href="{% static "vmware-clarity/@clr/icons/clr-icons.min.css" %}">
+
+    <!--Favicon -->
+    <link rel="icon" href="{% static "favicon.ico" %}">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+
+    {% load static %}
+    <!-- jQuery -->
+    <script src="{% static "jquery/jquery.min.js" %}"></script>
+    <!-- Bootstrap Core JavaScript -->
+    <script src="{% static "bootstrap/js/bootstrap.min.js" %}"></script>
+    <!-- Metis Menu Plugin JavaScript -->
+    <script src="{% static "metisMenu/metisMenu.js" %}"></script>
+    <!-- Chart.js -->
+    <script src="{% static "dist/js/Chart.min.js" %}"></script>
+    <!-- Custom Theme JavaScript -->
+    <script src="{% static "dist/js/sb-admin-2.js" %}"></script>
+    <!--Created JavaScript file-->
+    <script src="{% static "js/main.js" %}"></script>
+    <!--Plotly JS library -->
+    <script src="{% static "dist/js/plotly-latest.min.js" %}"></script>
+
+    <!--CLARITY ICONS DEPENDENCY: CUSTOM ELEMENTS POLYFILL-->
+    <script src="{% static "vmware-clarity/node_modules/@webcomponents/custom-elements/custom-elements.min.js" %}"></script>
+    <!--CLARITY ICONS API & ALL ICON SETS-->
+    <script src="{% static "vmware-clarity/@clr/icons/clr-icons-lite.min.js" %}"></script>
+    <!--ICON SETS-->
+    <script src="{% static "vmware-clarity/@clr/icons/shapes/technology-shapes.min.js" %}"></script>
+
+
+</head>
+
+<body>
+
+    <div id="wrapper">
+        <!-- Navigation -->
+        <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="index.html">VMware Dashboard</a>
+            </div>
+            <!-- /.navbar-header -->
+            <ul class="nav navbar-top-links navbar-right">
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        <i class="fa fa-user fa-fw"></i> {{user_name}} <i class="fa fa-caret-down"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-user">
+                        <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
+                        </li>
+                        <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
+                        </li>
+                        <li class="divider"></li>
+                        <li><a href="{% url 'logout' %}"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                        </li>
+                    </ul>
+                    <!-- /.dropdown-user -->
+                </li>
+                <!-- /.dropdown -->
+            </ul>
+            <!-- /.navbar-top-links -->
+            <div class="navbar-default sidebar" role="navigation">
+                <div class="sidebar-nav navbar-collapse">
+                    <ul class="nav" id="side-menu">
+                        <li >
+                            <a class="active" href="{% url 'index' %}"><clr-icon shape="dashboard" class="is-solid" size="20"></clr-icon> Dashboard</a>
+                        </li>
+                        {% for element in datacenters %}
+                            {% for dc_name,clusters in element.items %}
+                                <li>
+                                    <a href="#"><clr-icon shape="building" class="is-solid" size="20"></clr-icon>{{dc_name}}<span class="fa arrow"></span></a>
+                                    <ul class="nav nav-second-level">
+                                    {% for cluster_object in clusters %}
+                                        <li>
+                                            <a href="#" data-link="{% url 'cluster' cluster=cluster_object.name interval=1 %}"><clr-icon shape="cluster" class="is-solid" size="19"></clr-icon><span class="clusters" style="cursor: pointer; position: absolute; width: 60%;">{{cluster_object.name}}</span><span class="fa arrow"></span></a>
+                                            <ul class="nav nav-third-level">
+                                            {% for host_name in cluster_object.hosts %}
+                                                <li>
+                                                    <a href="#" class="hosts" data-link="{% url 'host' host=host_name interval=1 %}"><clr-icon shape="host" class="is-solid" size="18"></clr-icon>{{ host_name }}</a>
+                                                </li>
+                                            {% endfor %}
+                                            {% for vm_object in cluster_object.vms %}
+                                                <li>
+                                                    <a class="vms" href="#" data-link="{% url 'vm' uuid=vm_object.uuid interval=1 %}"><clr-icon shape="vm"></clr-icon>{{vm_object.name}}</a>
+                                                </li>
+                                            {% endfor %}
+                                            </ul>
+                                        </li>
+                                    {% endfor %}
+                                    </ul>
+                                </li>
+                            {% endfor %}
+                        {% endfor %}
+                    </ul>
+                </div>
+                <!-- /.sidebar-collapse -->
+            </div>
+            <!-- /.navbar-static-side -->
+        </nav>
+
+        <div id="page-wrapper">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1 class="page-header1">{{title}}</h1>
+                </div>
+    <!-- /.col-lg-12 -->
+                <div class="loader"></div>
+            </div>
+
+            <div id="page_section">
+                {% include "dashboard.html" %}
+            </div>
+
+        </div>
+
+    </div>
+    <!-- /#wrapper -->
+
+</body>
+
+</html>

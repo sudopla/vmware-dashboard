@@ -1,0 +1,224 @@
+<div class="row">
+
+    <div class="col-xs-12 col-sm-12 col-md-5 col-lg-5" id="general_metrics" style="max-width: 400px;">
+        <!--CPU -->
+        <div class="row metric">
+            <span>CPU</span><span class="float_right">Free: {{metrics_usage.free_cpu}} GHz</span>
+            <div class="progress">
+                <div class="progress-bar" role="progressbar" aria-valuenow={{metrics_usage.percent_consumed_cpu}} aria-valuemin="0" aria-valuemax="100" style="width: {{metrics_usage.percent_consumed_cpu}}%;min-width: 2em;">
+                    {{metrics_usage.percent_consumed_cpu}}%
+                </div>
+            </div>
+            <span>Used: {{metrics_usage.total_consumed_cpu}} MHz </span><span class="float_right">Capacity: {{metrics_usage.total_cpu}} GHz</span>
+        </div>
+        <!--Memory -->
+        <div class="row metric">
+            <span>Memory</span><span class="float_right">Free: {{metrics_usage.free_memory}} GB</span>
+            <div class="progress">
+                <div class="progress-bar" role="progressbar" aria-valuenow={{metrics_usage.percent_consumed_mem}} aria-valuemin="0" aria-valuemax="100" style="width: {{metrics_usage.percent_consumed_mem}}%;min-width: 2em;">
+                    {{metrics_usage.percent_consumed_mem}}%
+                </div>
+            </div>
+            <span>Used: {{metrics_usage.total_consumed_mem}} GB </span><span class="float_right">Capacity: {{metrics_usage.total_memory}} GB</span>
+        </div>
+        <!--Storage -->
+        {% if metrics_usage.disk_bool %}
+            <div class="row metric">
+                <span>Storage</span><span class="float_right">Free: {{metrics_usage.free_storage}} GB</span>
+                <div class="progress">
+                    <div class="progress-bar" role="progressbar" aria-valuenow={{metrics_usage.percent_used_storage}} aria-valuemin="0" aria-valuemax="100" style="width: {{metrics_usage.percent_used_storage}}%;min-width: 2em;">
+                        {{metrics_usage.percent_used_storage}}%
+                    </div>
+                </div>
+                <span>Used: {{metrics_usage.used_storage}} GB </span><span class="float_right">Capacity: {{metrics_usage.total_storage}} GB</span>
+            </div>
+        {% endif %}
+    </div>
+
+    <!-- Right Side of the screen-->
+    <div class="col-md-1 col-lg-1">
+
+    </div>
+
+    <div class="col-md-6 col-lg-6 squares">
+        <div class="row">
+            <div class="pull-right">
+                <div class="tile_stats_count">
+                  <span class="count_top"><i class="fa fa-power-off"></i> State</span>
+                  <div class="count">On</div>
+                </div>
+                <div class="tile_stats_count">
+                  <span class="count_top"><clr-icon shape="vm" size="20"></clr-icon> VM Tools</span>
+                      <div class="count">{{metrics_usage.vm_tools_status}}</div>
+                </div>
+                <div class="tile_stats_count">
+                      <span class="count_top"><i class="fa fa-server"></i> Guest OS</span>
+                      <div class="count">{{metrics_usage.os_name}}</div>
+                </div>
+                <div class="tile_stats_count">
+                     <span class="count_top"><clr-icon shape="cpu" size="20"></clr-icon> CPUs</span>
+                      <div class="count">{{metrics_usage.num_cpus}}</div>
+                </div>
+                <div class="tile_stats_count">
+                      <span class="count_top"><clr-icon shape="connect" size="20"></clr-icon> NICs</span>
+                      <div class="count">{{metrics_usage.num_nics}}</div>
+                </div>
+                <div class="tile_stats_count">
+                  <span class="count_top"><clr-icon shape="hard-disk" size="20"></clr-icon> Hard Drives</span>
+                      <div class="count">{{metrics_usage.number_of_disks}}</div>
+                </div>
+                {% if metrics_usage.ip_address %}
+                <div class="tile_stats_count">
+                      <span class="count_top"><clr-icon shape="hard-disk"></clr-icon> IP address</span>
+                      <div class="count">{{metrics_usage.ip_address}}</div>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<hr/>
+
+{% if metrics_usage.disk_bool %}
+    <div class="row">
+         <div class="col-md-6 col-sm-5 col-xs-6">
+              <div class="x_panel tile fixed_height_380">
+                <div class="x_title">
+                  <h2>Virtual Disks - Used Space</h2>
+                  <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                    {% for disk_name, disk_values in metrics_usage.disks_list_dict.items %}
+                        <div class="widget_summary">
+                            <div class="w_left w_25">
+                              <span>{{disk_name}}</span>
+                            </div>
+                            <div class="w_center w_55">
+                              <div class="progress">
+                                <div class="progress-bar bg-green" role="progressbar" aria-valuenow={{disk_values.percent}} aria-valuemin="0" aria-valuemax="100" style="width: {{disk_values.percent}}%;">
+                                  <span class="sr-only">{{disk_values.percent}}% Complete</span>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="w_right w_20">
+                              <span>{{disk_values.used_space}}GB</span>
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                  {% endfor %}
+                </div>
+              </div>
+        </div>
+
+
+        <div class="col-md-6 col-sm-5 col-xs-6">
+              <div class="x_panel tile fixed_height_380">
+                <div class="x_title">
+                  <h2>Virtual Disks Avg Latency</h2>
+                  <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+
+                  {% for disk_scsi, metrics in metrics_usage.disks_latency.items %}
+
+                      <div class="widget_summary">
+                        <div class="w_left w_25">
+                          <span>{{disk_scsi}}</span>
+                        </div>
+                        <div class="w_center w_55">
+                          <div class="progress">
+                            <div class="progress-bar bg-green" role="progressbar" aria-valuenow={{metrics.percent}} aria-valuemin="0" aria-valuemax="100" style="width: {{metrics.percent}}%;">
+                              <span class="sr-only">{{metrics.percent}}% Complete</span>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="w_right w_20">
+                          <span>{{metrics.value}}ms</span>
+                        </div>
+                        <div class="clearfix"></div>
+                      </div>
+
+                  {% endfor %}
+
+                </div>
+              </div>
+        </div>
+    </div>
+
+<hr/>
+{% endif %}
+
+<!-- Real Time Graphs-->
+
+<div class="row">
+
+    <div class="col-md-6 col-sm-5 col-xs-6">
+        <div class="x_panel tile fixed_height_380">
+            <div class="x_title">
+              <h2>Memory - Real Time</h2>
+              <div class="clearfix"></div>
+            </div>
+            <div id="realtime_graph_memory">
+
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6 col-sm-5 col-xs-6">
+        <div class="x_panel tile fixed_height_380">
+            <div class="x_title">
+              <h2>CPU - Real Time</h2>
+              <div class="clearfix"></div>
+            </div>
+            <div id="realtime_graph_cpu">
+
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6 col-sm-5 col-xs-6">
+        <div class="x_panel tile fixed_height_380">
+            <div class="x_title">
+              <h2>Network - Real Time</h2>
+              <div class="clearfix"></div>
+            </div>
+            <div id="realtime_graph_network">
+
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6 col-sm-5 col-xs-6">
+        <div class="x_panel tile fixed_height_380">
+            <div class="x_title">
+              <h2>Disk - Real Time</h2>
+              <div class="clearfix"></div>
+            </div>
+            <div id="realtime_graph_disk">
+
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<hr/>
+
+<div id="graphs">
+
+    {% include "vm_graphs.html" %}
+
+</div>
+
+<script>
+   var json_memory = {{ memory_realtime | safe }};
+   var json_cpu = {{cpu_realtime | safe}};
+   var json_network = {{network_realtime | safe}};
+   var json_disks = {{disks_realtime| safe}};
+</script>
+
+{% load static %}
+<!-- Chart.js -->
+<script src="{% static "dist/js/vm.js" %}"></script>

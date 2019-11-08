@@ -1,0 +1,52 @@
+.squares {
+       margin-left: 0px;
+       float: right;
+}
+.horizontal_sep {
+    margin-top: 5px;
+}
+.tile_stats_count {
+    width: 150px;
+    float: left;
+    border: 1px solid #D9DEE4;
+    padding: 5px 10px 0 20px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    position: relative;
+    margin-right: 5px;
+    margin-top: 5px;
+}
+.tile_stats_count .count {
+    font-size: 20px;
+    line-height: 47px;
+    font-weight: 600
+}
+.tile_stats_count span {
+    font-size: 14px
+}
+
+.tile_stats_count i {
+    width: 18px
+}
+.count_top {
+    float: left;
+    width: 90%;
+}
+.count {
+    font-weight: bold;
+    line-height: 1.65857;
+    color: #1ABB9C;
+}
+.count{
+    position: relative;
+    margin: 0;
+    margin-left: 10px;
+    z-index: 5;
+    padding: 0
+}
+.count {
+    width: 30%;
+    float: left;
+    text-align: right
+}

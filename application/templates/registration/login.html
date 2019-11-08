@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>VMware Dashboard</title>
+
+    {% load static %}
+    <!-- Bootstrap Core CSS -->
+    <link href="{% static "bootstrap/css/bootstrap.min.css" %}" rel="stylesheet">
+    <!-- Custom Fonts -->
+    <link href="{% static "font-awesome/css/font-awesome.min.css" %}" rel="stylesheet" type="text/css">
+    <!-- Custom CSS -->
+    <link href="{% static "dist/css/login.css" %}" rel="stylesheet">
+
+
+    {% load static %}
+    <!-- jQuery -->
+    <script src="{% static "jquery/jquery.min.js" %}"></script>
+    <!-- Bootstrap Core JavaScript -->
+    <script src="{% static "bootstrap/js/bootstrap.min.js" %}"></script>
+
+
+</head>
+
+<body>
+
+<div id="myModal" class="">
+	<div class="modal-dialog modal-login">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h4 class="modal-title">Welcome</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+			</div>
+			<div class="modal-body">
+				<form action="" method="post">
+                    {% csrf_token %}
+					<div class="form-group">
+						<div class="input-group">
+							<span class="input-group-addon"><i class="fa fa-user"></i></span>
+							<input type="text" id="id_username" class="form-control" name="username" placeholder="Username" required="required">
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="input-group">
+							<span class="input-group-addon"><i class="fa fa-lock"></i></span>
+							<input type="password" id="id_password" class="form-control" name="password" placeholder="Password" required="required">
+						</div>
+					</div>
+					<div class="form-group">
+						<button type="submit" class="btn btn-primary btn-block btn-lg">Log In</button>
+					</div>
+					<p class="hint-text"><a href="#">Forgot Password?</a></p>
+				</form>
+			</div>
+            {% if form.errors %}
+			    <div class="modal-footer"><p class="alert alert-danger">Please enter a correct username and password</p></div>
+            {% endif %}
+
+		</div>
+	</div>
+</div>
+
+
+</body>
+
+</html>
