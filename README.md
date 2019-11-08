@@ -13,3 +13,7 @@ This application will help you understand how you are using the resources in you
  When you first load the application you will have a general view of your infrastrcuture. 
 
  ![datacenter](img/datacenter_1.PNG)
+
+You can see the resources that are using more resources in your infrastructure 
+
+![datacenter](img/datacenter_2.PNG)
