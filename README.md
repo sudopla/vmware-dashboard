@@ -25,7 +25,7 @@ Historical metrics reports for memory, CPU and storage
 
 ---
 
-On the left sidebar you can click on a cluster to analyze its performance and usage 
+Cluster View
 
 ![cluster](img/cluster_1.PNG)
 
@@ -43,7 +43,7 @@ Historical metrics and trends in the cluster
 
 ---
 
-ESXi hosts view
+ESXi Host View
 
 ![cluster](img/esxi_1.PNG)
 
@@ -53,7 +53,7 @@ Trends
 
 ---
 
-VM View
+VM view
 
 ![vm](img/vm_1.PNG)
 
